@@ -1,0 +1,10 @@
+;$Id$
+
+name = Repository Browser
+description = Browses Fedora object properties, relationships, and datastreams
+package = Islandora Consortium Group
+core = 7.x
+files[] = icg_browse.module
+
+;dependencies[] = autoload
+;php = 5.3.3

@@ -1,0 +1,59 @@
+USED OR RELATED RESOURCES:
+
+Fedora Resource Index Search Service
+- http://fedora-commons.org/download/2.2/userdocs/server/webservices/risearch/
+
+Fedora RELS-EXT Ontology
+- http://www.fedora.info/definitions/1/0/fedora-relsext-ontology.rdfs
+
+Fedora-model Ontology
+- https://wiki.duraspace.org/display/DEV/fedora-model+Ontology
+
+Resource Index Search
+- https://wiki.duraspace.org/display/FEDORA34/Resource+Index+Search
+
+What are Fedora Digital Object Relationships?
+- https://wiki.duraspace.org/display/FEDORA34/Digital+Object+Relationships
+
+Triples in the Resource Index
+- https://wiki.duraspace.org/display/FEDORA34/Triples+in+the+Resource+Index
+
+Supporting the Semantic Web and Linked Data
+- https://wiki.duraspace.org/display/FCREPO/Supporting+the+Semantic+Web+and+Linked+Data
+
+ModeShape : RESTful API
+- https://docs.jboss.org/author/display/MODE/REST+Service+3.x
+
+Digibess: thanks Islandora! [2013 presentation]
+- http://europe.islandora.ca/sites/europe.islandora.ca/files/slides/digibessThanksIslandora.pdf
+
+DigiBess Dev zone : Collection object for custom query and view
+- http://dev.digibess.it/doku.php?id=model:customcoll
+
+W3C : SPARQL Query Language for RDF
+- http://www.w3.org/TR/rdf-sparql-query/
+
+FEDORA PROGRAM RESOURCES
+List of FecoraCommons Documentation (select version of preference)
+- https://wiki.duraspace.org/display/FEDORA/All+Documentation
+Class ObjectFields
+- http://www.fedora-commons.org/documentation/2.2.3/javadocs/fedora/server/search/ObjectFields.html#FTYPE
+
+SPARQL
+SPARQL 1.1 Query Language (W3C)
+- http://www.w3.org/TR/sparql11-query/
+
+XQuery/SPARQL Tutorial
+- http://en.wikibooks.org/wiki/XQuery/SPARQL_Tutorial
+
+SPARQL ENDPOINTS
+SPARQLer - General purpose processor
+- http://sparql.org/sparql.html
+
+Virtuoso SPARQL Query Editor (DBpedia)
+- http://dbpedia.org/sparql
+- http://demo.openlinksw.com/sparql
+
+Redland Rasqal RDF Query Demonstration
+- http://librdf.org/query/
+

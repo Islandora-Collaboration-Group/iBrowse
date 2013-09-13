@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="chart.xslt"?>
+
+<chart type="pie">
+	<title>Sales Figures</title>
+	<ytitle>Sales</ytitle>
+	<xtitle>Years</xtitle>
+	<labels>
+		<label>2005</label>
+		<label>2006</label>
+		<label>2007</label>
+	</labels>
+	<data name="Magnums">
+		<value>30</value>
+		<value>12</value>
+		<value>22</value>
+	</data>
+	<data name="Trumpets">
+		<value>12</value>
+		<value>22</value>
+		<value>12</value>
+	</data>
+	<data name="Choc Ices">
+		<value>22</value>
+		<value>15</value>
+		<value>13</value>
+	</data>
+	<data name="Lollipops">
+		<value>47</value>
+		<value>25</value>
+		<value>14</value>
+	</data>
+</chart>

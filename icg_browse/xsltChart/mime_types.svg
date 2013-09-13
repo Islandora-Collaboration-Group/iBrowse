@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="chart.xslt"?>
+
+<chart type="pie">
+    <title>iBrowse Statistics</title>
+    <ytitle>Sales</ytitle>
+    <xtitle>Years</xtitle>
+    <labels>
+        <label>MIME Types</label>
+    </labels>
+    <data name="ogg (13)">
+        <value>13</value>
+    </data>
+    <data name="mp4 (1)">
+        <value>1</value>
+    </data>
+    <data name="x-matroska (1)">
+        <value>1</value>
+    </data>
+    <data name="image/tif">
+        <value>59</value>
+    </data>
+    <data name="image/jpeg">
+        <value>456</value>
+    </data>
+    <data name="image/jpg">
+        <value>223</value>
+    </data>
+
+    <title>iBrowse Chart</title>
+    <labels>
+        <label>MIME Types</label>
+    </labels>
+    <data name="application/tei+xml">
+        <value>1844</value>
+    </data>
+    <data name="application/vnd.openxmlformats-officedocument.presentationml.presentation">
+        <value>1</value>
+    </data>
+    <data name="application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+        <value>57</value>
+    </data>
+    <data name="application/xml">
+        <value>4</value>
+    </data>
+    <data name="audio/mpeg">
+        <value>1</value>
+    </data>
+    <data name="audio/ogg">
+        <value>1</value>
+    </data>
+    <data name="image/jp2">
+        <value>1905</value>
+    </data>
+    <data name="image/jpeg">
+        <value>223</value>
+    </data>
+    <data name="image/jpg">
+        <value>456</value>
+    </data>
+    <data name="image/png">
+        <value>79</value>
+    </data>
+    <data name="image/tif">
+        <value>6</value>
+    </data>
+    <data name="image/tiff">
+        <value>59</value>
+    </data>
+    <data name="plain/text">
+        <value>1</value>
+    </data>
+    <data name="text/html">
+        <value>58</value>
+    </data>
+    <data name="text/plain">
+        <value>110</value>
+    </data>
+    <data name="video/mp4">
+        <value>1</value>
+    </data>
+    <data name="video/ogg">
+        <value>13</value>
+    </data>
+    <data name="video/quicktime">
+        <value>14</value>
+    </data>
+    <data name="video/x-matroska">
+        <value>1</value>
+    </data>
+
+    <title> iBrowse Chart</title>
+    <labels>
+        <label> Video MIME Types</label>
+    </labels>
+    <data name="quicktime (14)">
+        <value> 14</value>
+    </data>
+    <data name="ogg (13)">
+        <value>13</value>
+    </data>
+    <data name="mp4 (1)">
+        <value>1</value>
+    </data>
+    <data name="x-matroska (1)">
+        <value>1</value>
+    </data>
+</chart>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="chart.xslt"?>
+
+<chart width="300" height="200" type="bar" background="url(#background)" fill="white" font-family="sans-serif" depth="2.5">
+	<before>
+		<defs>
+			<radialGradient id="background" cx="50%" cy="-20%" r="100%" fx="50%" fy="0%">
+				<stop offset="0%" style="stop-color:#ff0"/>
+				<stop offset="20%" style="stop-color:#fa0"/>
+				<stop offset="50%" style="stop-color:#f00"/>
+				<stop offset="100%" style="stop-color:#000"/>
+			</radialGradient>
+		</defs>
+	</before>
+	
+	<title fill="black">Sunspot Activity</title>
+	<ytitle>Sunspots</ytitle>
+	<xtitle>Month</xtitle>
+	<axes fill="grey" stroke="grey" />
+	<labels fill="grey" font-size="9">
+		<label>Jan</label>
+		<label>Feb</label>
+		<label>Mar</label>
+		<label>Apr</label>
+		<label>May</label>
+		<label>Jun</label>
+		<label>Jul</label>
+		<label>Aug</label>
+		<label>Sep</label>
+		<label>Oct</label>
+		<label>Nov</label>
+		<label>Dec</label>
+	</labels>
+	<dataset>
+		<data color="#fa0" name="2006">
+			<value>5</value>
+			<value>7</value>
+			<value>6</value>
+			<value>8</value>
+			<value>1</value>
+			<value>3</value>
+			<value>9</value>
+			<value>4</value>
+			<value>2</value>
+			<value>3</value>
+			<value>0</value>
+			<value>4</value>
+		</data>
+		<data color="#ff0" name="2007">
+			<value>7</value>
+			<value>6</value>
+			<value>8</value>
+			<value>1</value>
+			<value>3</value>
+			<value>9</value>
+			<value>4</value>
+			<value>2</value>
+			<value>3</value>
+			<value>0</value>
+			<value>4</value>
+			<value>5</value>
+		</data>
+		<data color="#fff" name="2008">
+			<value>6</value>
+			<value>8</value>
+			<value>1</value>
+			<value>3</value>
+			<value>9</value>
+			<value>4</value>
+			<value>2</value>
+			<value>3</value>
+			<value>0</value>
+			<value>4</value>
+			<value>5</value>
+			<value>7</value>
+		</data>
+
+	</dataset>
+</chart>

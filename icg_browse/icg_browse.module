@@ -1,0 +1,470 @@
+<?php
+// $Id$
+
+/**
+* @file
+* A module exemplifying Drupal coding
+*
+* This module provides a block that lists various statistical attributes of the Fedora database
+*/
+
+/**
+ * Implements hook_help().
+ */
+
+// display a Help message "A demonstration module"
+
+function icg_browse_help($path, $arg) {
+ if ($path == 'admin/help#icg_dash') {
+  return t('Browses Fedora object properties, relationships, and datastreams');
+  }
+}
+
+/**
+ * Implements hook_block_info().
+ */
+
+function icg_browse_block_info() {
+	$blocks = array();
+
+// define a block named list_modules
+// info = defines what the block does
+// cache = tells Drupal how to cache the data from this block
+// for other properties see : http://api.drupal.org/api/function/hook_block_info/7
+
+	$blocks['list_modules'] = array(
+	'info' => t('Repository Browse'),
+	'cache' => DRUPAL_NO_CACHE,
+	);
+
+	return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+
+function icg_browse_block_view($block_name = '') {
+
+	if(isset($_GET['icg_server'])) {
+			$icg_server = $_GET['icg_server'];
+		} else {
+			$icg_server = "http://".$_SERVER['SERVER_NAME'].":8080";
+		}
+
+	if(isset($_GET['icg_limit'])) {
+			$icg_limit = $_GET['icg_limit'];
+		} else {
+			$icg_limit = "20000";
+		}
+
+	$content ='
+<!-- IF THESE JAVASCRIPT AND STYLESHEET FILES ARE CALLED ONCE, THEY WILL APPLY TO ALL ICG MODULES CALLED ON THE SAME PAGE -->
+<script type="text/javascript" src="/sites/all/modules/custom/icg_browse/js/icg_show_hide.js"></script>
+<link rel="stylesheet" type="text/css" href="/sites/all/modules/custom/icg_browse/css/icg_dashboard.css"/>
+
+<div class="icg_dashboard">
+<p>A Drupal 7 Module for Managing Fedora Object Properties and Relationships in Islandora Repositories</p>
+<br/>
+
+	<h3 class="show" onclick="showhide(\'repo_stats\')">&lt;View iBrowse&gt;</h3>
+
+	<div id="repo_stats">
+
+		<div class="header">
+
+			<p class="title"><span style="color:brown">i</span>Browse</span><br/>
+					<img class="logo" src="/sites/all/modules/custom/icg_browse/images/ibrowse.jpg"/>
+			</p>
+		<br/>
+      <ul class="guide">
+          <li><p>Sends iTQL queries to Fedora\'s "Resource Index" of RDF triples.</p><br/></li>
+					<li><p>Config.: Supply &lt;your_fedora_server&gt; in "Server Settings" below.</p></li>
+      </ul>
+
+		</div>
+
+<div class="forms">
+
+<fieldset>
+		<legend type="show" class="show" onclick="showhide(\'icg_server\')">Server Settings -- Server set to: '.$icg_server.'&nbsp;&nbsp;(change)</p>
+</legend>
+</fieldset>
+
+<div id="icg_server">
+
+	<fieldset style="margin-top:-27px">
+			<form action="http://'.$_SERVER["SERVER_NAME"].'/icg-browse" method="get">
+					<div class="indent"">
+						<p style=margin-top:4px><b>Current Fedora server</b>: <u>'.$icg_server.'</u><br/>
+						(If not correct, specify another server below.)</p>
+						<p style="margin-top:10px;font-weight:bold">1. Enter your Fedora server address here:</p>
+								<input type="text" name="icg_server" size="60" value="http://&lt;your_fedora_server&gt;:8080" />
+							  <input type="submit" name="icg_submit" value="Submit" />
+						<br style="line-height:.5em"/>
+						<p class="indent">e.g. "http://137.149.200.34:8080" (Islandora Sandbox)</p>
+					</div>
+			</form>
+
+			<form action="http://'.$_SERVER["SERVER_NAME"].'/icg-browse" method="get">
+					<div style="margin-top:12px" class="indent">
+						<p style="font-weight:bold">2. Or, select one of these open Fedora servers:</p>
+						<select id="server" name="icg_server">
+								<option value="" selected>- Select a server -</option>
+								<option value="http://150.209.9.113:8080">DHi - Hamilton College</option>
+								<option value="http://137.149.200.34:8080">Islandora Sandbox</option>
+						</select>
+							<input type="submit" name="icg_submit" value="Change to selected server" />
+						</div>
+			</form>
+	</fieldset>
+</div>
+
+			<form action="/sites/all/modules/custom/icg_browse/includes/icg_make_query.php" method="get">
+				<fieldset>
+					<legend>Fedora Object to Object Relationships (RELS-EXT)</legend>
+					<div class="icg_input">
+						<input type="radio" name="icg_stype" value="collection" /> <b>Top-level Collection Objects</b>
+						<p class="indent">Object &lt;fedora-rels-ext:isMemberOfCollection&gt; &lt;islandora:root&gt;</p></input>
+						<input type="radio" name="icg_stype" value="collection2" /> <b>Top-level Collection Objects</b> [an alternative coding to previous search]
+						<p class="indent">Object &lt;fedora-rels-ext:isMemberOf&gt; &lt;islandora:root&gt;</p></input>
+						<input type="radio" name="icg_stype" value="member" /> <b>Compound Objects</b><span class="icg_highlight" >*</span>
+						<p class="indent">Object &lt;fedora-rels-ext:isMemberOf&gt; Object</p></input>
+					</div>
+						<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+					<div class="icg_submit">
+						<input type="submit" name="icg_submit" value="Submit" />
+				</div>
+				<p class="indent"><span class="icg_highlight" >*</span> Results may be slow, depending on the number of objects in the repository.</p>
+				</fieldset>
+			</form>
+
+
+<!--
+			<form action="/sites/all/modules/custom/icg_browse/includes/icg_make_query.php" method="get">
+				<fieldset>
+					<legend>Fedora Datastream to Datastream Relationships (RELS-INT)</legend>
+					<div class="icg_input">
+						<input type="radio" name="icg_stype" value="rel_fed_rels_int" /> <b>Datastream Relationships (RELS-INT)</b> (&lt;fedora-rels-int:xxx&gt;)<span class="icg_highlight">*</span> [NOT IMPLEMENTED YET]</input>
+					</div>
+					<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+					<div class="icg_submit">
+						<input type="submit" name="icg_submit" value="Submit" />
+				</div>
+				<p class="indent"><span class="icg_highlight" >*</span> Results may be slow, depending on the number of objects in the repository.</p>
+				</fieldset>
+			</form>
+-->
+			<form action="/sites/all/modules/custom/icg_browse/includes/icg_make_query.php" method="get">
+				<fieldset>
+				<legend>Fedora Content Model Relationships (RELS-EXT)</legend>
+				<div class="icg_input">
+					<input type="radio" name="icg_stype" value="cmodel" /> <b>hasModel</b> (Object &lt;fedora-model:hasModel&gt; CModel Object)</input><br/>
+						<p class="indent">(images, books, pages, videos, custom content models, etc.)</p></input>
+
+					<input type="radio" name="icg_stype" value="service" /> <b>hasService</b> (CModel Object &lt;fedora-model:hasService&gt; SDef Object)<br/>
+					<input type="radio" name="icg_stype" value="contractor" /> <b>isContractorOf</b> (SDef Object &lt;fedora-model:isContractorOf&gt; CModel Object)<br/>
+					<input type="radio" name="icg_stype" value="deployment" /> <b>isDeploymentOf</b> (SDep Object &lt;fedora-model:isDeploymentOf&gt; SDef Object)
+				</div>
+<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+				<div class="icg_submit">
+					<input type="submit" name="icg_submit" value="Submit" />
+				</div>
+				</fieldset>
+			</form>
+
+			<form action="/sites/all/modules/custom/icg_browse/includes/icg_make_query.php" method="get">
+				<fieldset>
+				<legend>Fedora Miscellaneous Relationships (RELS-EXT)</legend>
+				<div class="icg_input">
+	    			<input type="radio" name="icg_stype" value="method" /> <b>definesMethod</b> (Object &lt;fedora-model:definesMethod&gt; Method)</input><br/>
+						<input type="radio" name="icg_stype" value="page" /> <b>isPageNumber</b> (Object &lt;fedora-rels-ext:isPageNumber&gt; Number)</input><br/>
+					</div>
+<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+				<div class="icg_submit">
+					<input type="submit" name="icg_submit" value="Submit" />
+				</div>
+				</fieldset>
+			</form>
+
+<!--
+						<input type="radio" name="icg_stype" value="rel_islandora" /> <b>All Islandora Relationships Used</b><span class="icg_highlight">*</span></input> (i.e., "http://islandora.ca/ontology/relsext#xxx")
+-->
+
+		<div>
+			<fieldset>
+				<legend>Islandora Relationships</legend>
+					<form action="/sites/all/modules/custom/icg_browse/includes/icg_make_query.php" method="get">
+							<div class="icg_input">
+								<b>Islandora Relationships</b><span class="icg_highlight">*</span><br/>
+								<select name="icg_sterm">
+										<option valuje="" selected>Select a Relationship</option>
+										<option value="hasLanguage">hasLanguage</option>
+										<option value="isCropOf">isCropOf</option>
+										<option value="isPageOf">isPageOf</option>
+										<option value="isPageNumber">isPageNumber</option>
+										<option value="isSection">isSection</option>
+										<option value="isSequenceNumber">isSequenceNumber</option>
+										<option value="isViewableByRole">isViewableByRole</option>
+										<option value="isViewableByUser">isViewableByUser</option>
+										<option value="preprocess">preprocess</option>
+							</select>
+							<input type="hidden" name="icg_stype" value="rel_islandora"/>
+						</div>
+	<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+					<div class="icg_submit">
+							<input type="reset" name="reset" value="Reset" />
+							<input type="submit" name="icg_submit" value="Submit" />
+						</div>
+				<p class="indent">
+				<span class="icg_highlight" >*</span> This list of Islandora relationships may not be complete and your repository may not necessarily use even these.
+				</p>
+					</form>
+				</fieldset>
+		</div>
+
+<!-- works but not needed
+		<div>
+			<fieldset>
+				<legend>Islandora Relationships</legend>
+					<form action="/sites/all/modules/custom/icg_browse/includes/icg_make_query.php" method="get">
+							<div class="icg_input">
+								<b>Islandora Relationships</b><span class="icg_highlight">*</span><br/>
+								<select name="icg_sterm">
+										<option valuje="" selected>Select a Relationship</option>
+										<option value="isBenshiOf">hasLanguage</option>
+										<option value="isClipOf">isPageOf</option>
+										<option value="isNarratorOf">isPageNumber</option>
+										<option value="isPresentationOf">isSection</option>
+										<option value="isStillOf">isSequenceNumber</option>
+										<option value="isClipOf">isViewableByRole</option>
+										<option value="isSubOf">preprocess</option>
+										<option value="isTranscriptOf">preprocess</option>
+							</select>
+							<input type="hidden" name="icg_stype" value="rel_local"/>
+						</div>
+	<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+					<div class="icg_submit">
+							<input type="reset" name="reset" value="Reset" />
+							<input type="submit" name="icg_submit" value="Submit" />
+						</div>
+				<p class="indent">
+				<span class="icg_highlight" >*</span>To create a list the custom relationships in your repository, populate this form in "icg_browse.module" with your relationships.
+				</p>
+					</form>
+				</fieldset>
+		</div>
+-->
+<!-- working but not needed
+			<form action="/sites/all/modules/custom/icg_browse/includes/icg_make_query.php" method="get">
+				<fieldset>
+					<legend>Hamilton College (custom) Relationships (RELS-EXT)</legend>
+					<input type="hidden" name="icg_sterm" value="hamilton"/>
+					<div class="icg_input">
+						<input type="radio" name="icg_stype" value="rel_local" /> <b>Discover all Hamilton College Custom Relationships</b><span class="icg_highlight">*</span>
+						<p class="indent">(i.e., "http://hamilton.org/ontology#xxx")</p>
+					</div>
+<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+					<div class="icg_submit">
+						<input type="submit" name="icg_submit" value="Submit" />
+				</div>
+				<p class="indent">
+				<span class="icg_highlight" >*</span>For performance purposes, the results of this "discovery" query has been limited to 20,000 hits (limit 20000). To change or remove the limits or the offset for this query, edit "icg_make_query.php" accordingly.<br/>
+				To customize this search for your local ontology, edit "icg_browse.module" and icg_hamilton.xsl".<br/>
+				Increasing the limit value might lock up your browser.
+				</p>
+				</fieldset>
+			</form>
+-->
+
+			<form action="/sites/all/modules/custom/icg_browse/includes/icg_make_query.php" method="get">
+				<fieldset>
+					<legend>Custom/Local Relationships (RELS-EXT)</legend>
+					<div class="icg_input">
+						<input type="radio" name="icg_stype" value="rel_custom" /> <b>Discover all Custom Relationships</b><span class="icg_highlight">*</span>
+						<p class="indent">(i.e., not Fedora or Islandora relationships)</p>
+					</div>
+<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+					<div class="icg_submit">
+						<input type="submit" name="icg_submit" value="Submit" />
+				</div>
+				<p class="indent">
+				<span class="icg_highlight" >*</span>If no custom ontology is found the results will be nil.<br/>
+				For performance purposes, the results of this "discovery" query has been limited to 20,000 hits (limit 20000). To change or remove the limits or the offset for this query, edit "icg_make_query.php" accordingly.<br/>
+				Increasing the limit value might lock up your browser.
+				</p>
+				</fieldset>
+			</form>
+
+		<div>
+				<fieldset>
+					<legend>Manual Relationship Search</legend>
+
+					<form action="/sites/all/modules/custom/icg_browse/includes/icg_make_query.php" method="get">
+						<div class="icg_input">
+							<input type="hidden" name="icg_stype" value="relations_inc"/>
+								<b>Enter a relationship of your choice.</b> <br/>
+								<input type="text" name="icg_sterm" size="60"/><br/>
+								Examples:<br/>
+								info:fedora/fedora-system:def/relations-external#isMemberOfCollection<br/>
+								info:fedora/fedora-system:def/model#hasModel<br/>
+								info:fedora/fedora-system:def/view#disseminates<br/>
+								http://islandora.ca/ontology/relsext#isPageNumber<br/>
+								http://hamilton.org/ontology#isClipOf<br/>
+							</div>
+	<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+					<div class="icg_submit">
+							<input type="reset" name="reset" value="Reset" />
+							<input type="submit" name="icg_submit" value="Submit" />
+						</div>
+					</form>
+
+			</fieldset>
+		</div>
+
+			<form action="/sites/all/modules/custom/icg_browse/includes/icg_make_query.php" method="get">
+				<fieldset>
+				<legend>Fedora Object-level Properties</legend>
+				<div class="icg_input">
+					<input type="radio" name="icg_stype" value="label" /> <b>List All Object Labels</b> (model#label [not the same as Datastream Label])<span class="icg_highlight">*</span></input><br/>
+					<input type="radio" name="icg_stype" value="owner" /> <b>List All Object Owners</b> (model#ownerId)</input><span class="icg_highlight">*</span></input><br/>
+					<input type="radio" name="icg_stype" value="inactive" /> <b>List All Inactive Objects</b> (model#state)</input><br/>
+					<input type="radio" name="icg_stype" value="deleted" /> <b>List All Deleted Objects</b> (model#state)</input><br/>
+
+<!--
+<br/>[Make new searches]<br/>
+					<input type="radio" name="icg_stype" value="lastPID" /> <b>Last PID</b> (model#PID)</input><br/>
+-->
+				</div>
+<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+				<div class="icg_submit">
+					<input type="submit" name="icg_submit" value="Submit" />
+				</div>
+				<div class="indent"><span class="icg_highlight" >*</span>For performance purposes, the results have been limited to 100 hits (limit 100). To change or remove the limits or the offset for these queries, edit "icg_make_query.php" accordingly</p>
+				</fieldset>
+			</form>
+
+		<div>
+				<fieldset>
+					<legend>Fedora Datastream-level Properties</legend>
+			  	<form action="/sites/all/modules/custom/icg_browse/includes/icg_make_query.php" method="get">
+						<div class="icg_input">
+								<input type="radio" name="icg_stype" value="dtype" /> <b>Show All Datastream IDs</b> (&lt;fedora-view:disseminationType&gt;)</input><br/>
+						</div>
+	<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+					<div class="icg_submit">
+							<input type="submit" name="icg_submit" value="Submit" />
+						</div>
+						<p class="indent"><span class="icg_highlight" >*</span>Not all repositories use this relationship.</p>
+		  		</form>
+			</fieldset>
+		</div>
+
+			<form action="/sites/all/modules/custom/icg_browse/includes/icg_make_query.php" method="get">
+				<fieldset>
+					<legend>Datastream MIME Types</legend>
+					<div class="icg_input">
+							<h3>Statistics</h3>
+							<input type="radio" name="icg_stype" value="mtype" /> <b>All MIME Types</b> (&lt;fedora-view:mimeType&gt;)</input><br/>
+							<h3>Charts</h3>
+							<input type="radio" name="icg_stype" value="mtype_image" /> <b>Images</b> (image/xxx)</input><br/>
+							<input type="radio" name="icg_stype" value="mtype_video" /> <b>Videos</b> (video/xxx)</input><br/>
+							<input type="radio" name="icg_stype" value="mtype_audio" /> <b>Audio</b> (audio/xxx)</input><br/>
+							<input type="radio" name="icg_stype" value="mtype_text" /> <b>Text</b> (text/xxx)</input><br/>
+							<input type="radio" name="icg_stype" value="mtype_application" /> <b>Applications</b> (application/xxx)</input><br/>
+<!--
+						<input type="radio" name="icg_stype" value="fedora-view" /> <b>List All Fedora Datastream Triples Used</b> (&lt;fedora-view:xxx&gt;)<span class="icg_highlight">*</span></input><br/>
+							<div class="indent"><p><span class="icg_highlight" >*</span> For performance reasons, this search has been limited to the first 20,000 triples ("limit 20000",<br/>
+				but links on the results page will search for all triples of that type.<br/>
+				Increasing the limit value might lock up your browser.
+				</p></div>
+-->
+					</div>
+<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+					<div class="icg_submit">
+						<input type="submit" name="icg_submit" value="Submit" />
+					</div>
+				</fieldset>
+			</form>
+
+		<div>
+					<fieldset>
+						<legend>Object/Datastream Dates</legend>
+
+						<form action="/sites/all/modules/custom/icg_browse/includes/icg_make_query.php" method="get">
+							<div class="icg_input">
+								<input type="hidden" name="icg_stype" value="cdate"> <b>List Objects Created After a Certain Date</b><br/>
+								Enter a date: yyyy-mm-dd&nbsp;
+								<input type="text" name="icg_sdate" size="14"/>
+							</div>
+							<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+							<div class="icg_submit">
+								<input type="submit" name="icg_submit" value="Submit" />
+							</div>
+						</form>
+
+						<form action="/sites/all/modules/custom/icg_browse/includes/icg_make_query.php" method="get">
+							<div class="icg_input">
+								<input type="hidden" name="icg_stype" value="mdate"> <b>List Objects Modified After a Certain Date</b><br/>
+								Enter a date: yyyy-mm-dd&nbsp;
+								<input type="text" name="icg_sdate" size="14"/>
+							</div>
+							<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+							<div class="icg_submit">
+								<input type="submit" name="icg_submit" value="Submit" />
+								<input type="submit" name="icg_submit" value="SPARQL" />
+							</div>
+						</form>
+				</fieldset>
+		</div>
+
+		<div>
+			<fieldset>
+				<legend>Dublin Core Metadata</legend>
+					<form action="/sites/all/modules/custom/icg_browse/includes/icg_make_query.php" method="get">
+							<div class="icg_input">
+								<b>Show all instances of...</b><br/>
+								<select name="icg_sterm">
+										<option value="title">dc:title</option>
+										<option value="creator">dc:creator</option>
+										<option value="contributor">dc:contributor</option>
+										<option value="description">dc:description</option>
+										<option value="language">dc:language</option>
+										<option value="date">dc:date</option>
+										<option value="publisher">dc:publisher</option>
+										<option value="coverage">dc:coverage</option>
+										<option value="subject">dc:subject</option>
+										<option value="identifier">dc:identifier</option>
+										<option value="relation">dc:relation</option>
+										<option value="source">dc:source</option>
+										<option value="type">dc:type</option>
+										<option value="format">dc:format</option>
+									<option value="rights">dc:rights</option>
+							</select>
+							<input type="hidden" name="icg_stype" value="dublin_core"/>
+						</div>
+	<input type="hidden" name="icg_server" value="'.$icg_server.'"/>
+					<div class="icg_submit">
+							<input type="submit" name="icg_submit" value="Submit" />
+						</div>
+				<br/>
+					<p style="clear:both;margin-left:13px">Dublin Core searches can also be performed using the Fedora Repository Find Objects Web Interface (http://localhost:8080/fedora/admin)</a>.</p>
+					</form>
+				</fieldset>
+		</div>
+
+		</div><!-- end of the forms -->
+
+	</div><!-- end id=repo_stats -->
+
+</div><!-- end of id=icgdashboard -->
+';
+		$block = array(
+			'subject' => t('<h2>iBrowse</h2><br/>(Module: ICG Repository Statistics)'),
+			'content' => $content,
+		);
+
+		return $block;
+//	}
+}

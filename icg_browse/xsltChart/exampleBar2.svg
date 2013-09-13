@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="chart.xslt"?>
+
+<chart width="300" height="200" type="bar" background="url(#blueGradient)" fill="white" font-family="sans-serif" depth="5" >
+	<before>
+		<defs>
+			<linearGradient id="blueGradient" x1="0" y1="1" x2="0" y2="0">
+				<stop offset="0%" stop-color="#0000ff" stop-opacity="1"/>
+				<stop offset="100%" stop-color="#000000" stop-opacity="1"/>
+			</linearGradient>
+		</defs>
+	</before>
+	<title fill="blue">Sales Figures</title>
+	<ytitle>Sales</ytitle>
+	<xtitle>Years</xtitle>
+	<axes fill="grey" stroke="grey" />
+	<labels fill="green">
+		<label>2006</label>
+		<label>2007</label>
+		<label fill="red">2008</label>
+	</labels>
+	<dataset fill="grey">
+		<data name="Magnums" color="#4444ff" fill="red">
+			<value>30</value>
+			<value>12</value>
+			<value>22</value>
+		</data>
+		<data name="Trumpets" color="#8888ff">
+			<value>12</value>
+			<value>22</value>
+			<value>12</value>
+		</data>
+		<data name="Choc Ices" color="#bbbbff">
+			<value>22</value>
+			<value>15</value>
+			<value>13</value>
+		</data>
+		<data name="Lollipops" color="#ddddff">
+			<value>47</value>
+			<value>25</value>
+			<value>14</value>
+		</data>
+	</dataset>
+</chart>

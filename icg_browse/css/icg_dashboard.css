@@ -1,0 +1,92 @@
+.icg_dashboard h3.show{
+    cursor:pointer;
+    margin:0;
+    margin-left:20px;
+    color:#49D3FF;
+    font-weight:bold;
+}
+#repo_stats
+{
+    display:block;
+    margin:10px 0 0 0;
+}
+#repo_stats .header  {
+	margin-bottom:5px;
+    border:1px solid #999;
+    background-color:rgb(238, 238, 238);
+    overflow: auto
+}
+#repo_stats .header .title {
+    float:left;
+    width:80px;
+    padding-left:14px;
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+}
+#repo_stats .header .logo {
+	width:70px;
+	border:1px solid #999;
+}
+#repo_stats .header .guide {
+    float:left;
+    margin:0;
+    padding-top:12px;
+    width:70%;
+}
+#repo_stats .forms { clear:both }
+p{
+    font-size:1em;
+    margin:0;
+}
+#repo_stats #icg_server,
+#services,
+#logs,
+#resources
+{
+    display:none;
+    margin:10px 0 0 0;
+}
+#repo_stats #icg_server {
+    margin-top:-10px;
+    padding-top:0;
+}
+legend{
+    font-weight:bold;
+}
+.icg_dashboard .icg_input{
+    margin:20px 0 0 10px;
+    padding:5px;
+    clear:both;
+}
+.icg_dashboard h3 {
+    font-weight:bold;
+    font-size:1.1em;
+    color:#0779BF;
+}
+.icg_submit {
+    clear:both;
+    margin-left:20px;
+    padding:0;
+}
+.icg_submit > input{
+    padding:2px 8px;
+}
+.icg_highlight{
+    color:red;
+    font-weight:bold;
+}
+form ul {
+    list-style:none;
+}
+.indent {
+    clear:both;
+    margin-left:15px
+}
+fieldset {	border:1px solid #999}
+button, 
+legend[type=show],
+input[type=submit], 
+input[type=reset], 
+input[type=file] 
+{cursor:pointer;}

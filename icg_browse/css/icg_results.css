@@ -1,0 +1,91 @@
+body{
+    margin-left:50px;
+    max-width:1800px;
+}
+th {text-align:left;
+font-size:1.2em !important;}
+#icg_query
+{
+    display:none;
+    border:1px solid rgb(205, 205, 205);
+    padding: 0 6px;
+}
+pre {font-family:courier, fixed, monospace}
+#icg_instructions{
+    width:95%;
+}
+#icg_content{
+    padding-bottom:60px;
+    width:95%;
+}
+#icg_toolbar > input {height:2em}
+.col_000{
+    width:auto;
+}
+.col_100{
+    width:9%;
+    /*    background-color:rgb(238, 238, 238);*/
+}
+.col_150{
+    width:14%;
+    /*    background-color:rgb(238, 238, 238);*/
+}
+.col_200{
+    width:18%;
+    /*    background-color:rgb(238, 238, 238);*/
+}
+.col_250{
+    width:24%;
+    /*    background-color:rgb(238, 238, 238);*/
+}
+.col_300{
+    width:29%;
+    /*    background-color:rgb(218, 218, 218);*/
+}
+.col_333{
+    width:32%;
+    /*    background-color:rgb(218, 218, 218);*/
+}
+.col_400{
+    width:39%;
+    /*    background-color:rgb(205, 205, 205);*/
+}
+.col_500{
+    width:49%;
+    /*    background-color:rgb(205, 205, 205); */
+}
+.col_600{
+    width:59%;
+    /*    background-color:rgb(225, 225, 225); */
+}
+.col_666{
+    width:66%;
+}
+.col_750{
+    width:74%;
+}
+.col_800{
+    width:79%;
+}
+.col_1000{
+    width:99%;
+}
+.count{
+    text-align:right;
+    padding-right:50px
+}
+a:link{
+    text-decoration:underline
+}
+a:hover{
+    color:#999;
+}
+#icg_footer{
+    clear:both;
+}
+#icg_notes {
+    width:68%;
+    border:1px solid #999;
+    padding:0 8px;
+    margin-bottom:10px;
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="chart.xslt"?>
+
+<chart width="300" height="200" type="bar" background="#ddf" font-family="sans-serif" depth="2.5" >
+	<after>
+		<g opacity=".7" transform="rotate(-30 150 100)">
+			<rect x="0" y="75" width="300" height="50" rx="10" ry="10" stroke="#f00" stroke-width="10" stroke-dasharray="20,10" fill="#fff"/>
+			<text font-family="sans-serif" font-size="40" x="150" y="115" text-anchor="middle" fill="#f00" stroke-width="0">TOP SECRET</text>
+		</g>
+	</after>
+	<title>Product Sales</title>
+	<ytitle>Sales ($000)</ytitle>
+	<xtitle>Year</xtitle>
+	<labels>
+		<label>2005</label>
+		<label>2006</label>
+		<label>2007</label>
+		<label>2008</label>
+	</labels>
+	<dataset>
+		<data name="Sprockets">
+			<value>30</value>
+			<value>12</value>
+			<value>22</value>
+			<value>30</value>
+		</data>
+		<data name="Widgets">
+			<value>22</value>
+			<value>15</value>
+			<value>13</value>
+			<value>22</value>
+		</data>
+		<data name="Sprigs">
+			<value>12</value>
+			<value>22</value>
+			<value>12</value>
+			<value>12</value>
+		</data>
+		<data name="Thingys">
+			<value>47</value>
+			<value>25</value>
+			<value>14</value>
+			<value>47</value>
+		</data>
+		<data name="Dodads">
+			<value>20</value>
+			<value>5</value>
+			<value>10</value>
+			<value>12</value>
+		</data>
+	</dataset>
+</chart>
