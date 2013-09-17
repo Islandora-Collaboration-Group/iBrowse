@@ -49,8 +49,12 @@ function icg_browse_block_view($block_name = '') {
 	if(isset($_GET['icg_server'])) {
 			$icg_server = $_GET['icg_server'];
 		} else {
-			$icg_server = "http://".$_SERVER['SERVER_NAME'].":8080";
+			$icg_server = "http://137.149.200.34:8080";
+			/* If you have installed iBrowse on your own server, you can uncomment the next line so iBrowse can default to your server
+			rather than to the Islandora Sandbox (assuming Fedora is installed on the same server and at port 8080). */
+//			$icg_server = "http://".$_SERVER['SERVER_NAME'].":8080";
 		}
+		
 
 	if(isset($_GET['icg_limit'])) {
 			$icg_limit = $_GET['icg_limit'];
@@ -87,7 +91,7 @@ function icg_browse_block_view($block_name = '') {
 <div class="forms">
 
 <fieldset>
-		<legend type="show" class="show" onclick="showhide(\'icg_server\')">Server Settings -- Server set to: '.$icg_server.'&nbsp;&nbsp;(change)</p>
+		<legend type="show" class="show" onclick="showhide(\'icg_server\')"><span style="color:red">Fedora Server Set to &lt;'.$icg_server.'&gt;&nbsp;(click to change)</span>
 </legend>
 </fieldset>
 
@@ -111,7 +115,6 @@ function icg_browse_block_view($block_name = '') {
 						<p style="font-weight:bold">2. Or, select one of these open Fedora servers:</p>
 						<select id="server" name="icg_server">
 								<option value="" selected>- Select a server -</option>
-								<option value="http://150.209.9.113:8080">DHi - Hamilton College</option>
 								<option value="http://137.149.200.34:8080">Islandora Sandbox</option>
 						</select>
 							<input type="submit" name="icg_submit" value="Change to selected server" />
